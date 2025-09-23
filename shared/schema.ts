@@ -76,6 +76,7 @@ export const guilds = pgTable("guilds", {
   maxMembers: integer("max_members").default(100),
   leaderId: varchar("leader_id"), // NPC leader
   description: text("description"),
+  emoji: text("emoji"),
   createdAt: timestamp("created_at").defaultNow()
 });
 

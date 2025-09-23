@@ -3,6 +3,7 @@ import { storage } from '../storage';
 import { gameEngine } from '../services/gameEngine';
 import { guildSystem } from '../services/guildSystem';
 import { economySystem } from '../services/economySystem';
+import EMOJIS from './emojis';
 
 export async function handleInteraction(interaction: any, commands: Collection<string, any>) {
   if (interaction.isChatInputCommand()) {
@@ -113,7 +114,7 @@ async function handleSelectMenuInteraction(interaction: StringSelectMenuInteract
 async function handleViewFleet(interaction: ButtonInteraction, userId: string) {
   const ships = await storage.getUserShips(userId);
   
-  let fleetText = '🚀 **Your Fleet:**\n\n';
+  let fleetText = `${EMOJIS.rocket} **Your Fleet:**\n\n`;
   ships.forEach(ship => {
     const status = ship.isActive ? '🟢' : '⚪';
     fleetText += `${status} **${ship.variant}** (${ship.type} T${ship.tier})\n`;
@@ -126,7 +127,7 @@ async function handleViewFleet(interaction: ButtonInteraction, userId: string) {
 async function handleViewResources(interaction: ButtonInteraction, userId: string) {
   const resources = await storage.getUserResources(userId);
   
-  let resourceText = '📦 **Your Resources:**\n\n';
+  let resourceText = `${EMOJIS.resources} **Your Resources:**\n\n`;
   resources.forEach(resource => {
     resourceText += `• **${resource.name}** x${resource.quantity} (${resource.rarity})\n`;
   });
@@ -140,21 +141,21 @@ async function handleViewResources(interaction: ButtonInteraction, userId: strin
 
 async function handleMarketBuy(interaction: ButtonInteraction, userId: string) {
   await interaction.reply({ 
-    content: '🏪 Market purchasing is available through the web dashboard or use specific buy commands!', 
+    content: `${EMOJIS.credits} Market purchasing is available through the web dashboard or use specific buy commands!`, 
     ephemeral: true 
   });
 }
 
 async function handleMarketSell(interaction: ButtonInteraction, userId: string) {
   await interaction.reply({ 
-    content: '💸 Market selling is available through the web dashboard or use specific sell commands!', 
+    content: `${EMOJIS.credits} Market selling is available through the web dashboard or use specific sell commands!`, 
     ephemeral: true 
   });
 }
 
 async function handleGuildContribute(interaction: ButtonInteraction, userId: string) {
   await interaction.reply({ 
-    content: '💎 Use `/guild contribute` to contribute resources to your guild!', 
+    content: `${EMOJIS.nexium} Use \/guild contribute to contribute resources to your guild!`, 
     ephemeral: true 
   });
 }
@@ -163,7 +164,7 @@ async function handleGuildLeave(interaction: ButtonInteraction, userId: string) 
   if (!userId) return;
   
   await storage.updateUser(userId, { guildId: null });
-  await interaction.reply({ content: '🚪 You have left your guild.', ephemeral: true });
+  await interaction.reply({ content: `${EMOJIS.commander} You have left your guild.`, ephemeral: true });
 }
 
 async function handleShipSelection(interaction: StringSelectMenuInteraction, userId: string, shipId: string) {
@@ -171,7 +172,7 @@ async function handleShipSelection(interaction: StringSelectMenuInteraction, use
   
   const ship = await storage.getShip(shipId);
   await interaction.reply({ 
-    content: `🚀 **${ship?.variant}** is now your active ship!`, 
+    content: `${EMOJIS.rocket} **${ship?.variant}** is now your active ship!`, 
     ephemeral: true 
   });
 }
@@ -181,7 +182,7 @@ async function handleGuildSelection(interaction: StringSelectMenuInteraction, us
   
   if (result.success) {
     await interaction.reply({ 
-      content: `🛡️ You have joined **${result.guild?.name}**!`, 
+      content: `${EMOJIS.commander} You have joined **${result.guild?.name}**!`, 
       ephemeral: true 
     });
   } else {

@@ -1,0 +1,148 @@
+Scout (Fast, agile exploration ship)
+Role: Quick sector scanning, resource discovery, evasion in combat.
+Base Stats: Health: 100, Speed: 80, Cargo: 20, Weapons: 1, Sensors: 60.
+Tier 1 (Swiftwing - Default for all user)
+Stats: Health: 100, Speed: 80, Cargo: 20, Weapons: 1, Sensors: 60.
+Upgrade Cost: N/A (starting tier).
+Features: Basic scanning, low cargo capacity.
+
+Tier 2 (Spectre)
+Stats: Health: 120 (+20), Speed: 90 (+10), Cargo: 25 (+5), Weapons: 1, Sensors: 70 (+10).
+Upgrade Cost: 500 Credits, 10 Nexium Crystals.
+Features: Improved sensors for hidden artifacts, minor speed boost.
+
+Tier 3 (Phantom)
+Stats: Health: 140 (+20), Speed: 100 (+10), Cargo: 30 (+5), Weapons: 2 (+1), Sensors: 80 (+10).
+Upgrade Cost: 1,200 Credits, 25 Nexium Crystals.
+Features: Enhanced evasion, additional weapon slot for light defense.
+
+Tier 4 (Max) (Celestial Whisper)
+Stats: Health: 160 (+20), Speed: 110 (+10), Cargo: 35 (+5), Weapons: 2, Sensors: 90 (+10).
+Upgrade Cost: 2,500 Credits, 50 Nexium Crystals.
+Features: Elite scanning range, maximum agility for exploration.
+
+---
+
+Fighter (Combat-focused vessel)
+Role: PvP battles, fleet skirmishes, bounty hunting.
+Base Stats: Health: 150, Speed: 70, Cargo: 15, Weapons: 3, Sensors: 40.
+Tier 1 (Vindicator)
+Stats: Health: 150, Speed: 70, Cargo: 15, Weapons: 3, Sensors: 40.
+Upgrade Cost: N/A (starting tier).
+Features: Balanced combat stats, standard weapons.
+
+Tier 2 (Gladiator)
+Stats: Health: 180 (+30), Speed: 75 (+5), Cargo: 18 (+3), Weapons: 4 (+1), Sensors: 45 (+5).
+Upgrade Cost: 600 Credits, 15 Nexium Crystals.
+Features: Reinforced hull, additional weapon for sustained fights.
+
+Tier 3 (Annihilator)
+Stats: Health: 210 (+30), Speed: 80 (+5), Cargo: 21 (+3), Weapons: 5 (+1), Sensors: 50 (+5).
+Upgrade Cost: 1,400 Credits, 30 Nexium Crystals.
+Features: Advanced targeting systems, improved maneuverability.
+
+Tier 4 (Max) (Dominator)
+Stats: Health: 240 (+30), Speed: 85 (+5), Cargo: 24 (+3), Weapons: 6 (+1), Sensors: 55 (+5).
+Upgrade Cost: 3,000 Credits, 60 Nexium Crystals.
+Features: Elite combat suite, maximum firepower for arena dominance.
+
+---
+
+Freighter (Cargo and trade ship)
+Role: Resource transportation, market trading, bulk operations.
+Base Stats: Health: 200, Speed: 50, Cargo: 100, Weapons: 1, Sensors: 30.
+
+Tier 1 (Hauler)
+Stats: Health: 200, Speed: 50, Cargo: 100, Weapons: 1, Sensors: 30.
+Upgrade Cost: N/A (starting tier).
+Features: High cargo capacity, basic trade defenses.
+
+Tier 2 (Bulkhead)
+Stats: Health: 240 (+40), Speed: 55 (+5), Cargo: 125 (+25), Weapons: 1, Sensors: 35 (+5).
+Upgrade Cost: 700 Credits, 20 Nexium Crystals.
+Features: Expanded cargo holds, minor hull reinforcement.
+
+Tier 3 (Citadel)
+Stats: Health: 280 (+40), Speed: 60 (+5), Cargo: 150 (+25), Weapons: 2 (+1), Sensors: 40 (+5).
+Upgrade Cost: 1,600 Credits, 35 Nexium Crystals.
+Features: Automated loading systems, defensive upgrades.
+
+Tier 4 (Max) (Goliath)
+Stats: Health: 320 (+40), Speed: 65 (+5), Cargo: 175 (+25), Weapons: 2, Sensors: 45 (+5).
+Upgrade Cost: 3,500 Credits, 70 Nexium Crystals.
+Features: Maximum cargo efficiency, fleet-grade protection.
+
+---
+
+Explorer (Long-range discovery ship)
+Role: Deep space exploration, wormhole navigation, artifact recovery.
+Base Stats: Health: 120, Speed: 60, Cargo: 40, Weapons: 2, Sensors: 80.
+Tier 1 (Pathfinder)
+Stats: Health: 120, Speed: 60, Cargo: 40, Weapons: 2, Sensors: 80.
+Upgrade Cost: N/A (starting tier).
+Features: Extended sensor range, exploration-focused.
+
+Tier 2 (Horizon Seeker)
+Stats: Health: 140 (+20), Speed: 65 (+5), Cargo: 50 (+10), Weapons: 2, Sensors: 90 (+10).
+Upgrade Cost: 550 Credits, 12 Nexium Crystals.
+Features: Improved navigation, artifact detection.
+
+Tier 3 (Nebula Navigator)
+Stats: Health: 160 (+20), Speed: 70 (+5), Cargo: 60 (+10), Weapons: 3 (+1), Sensors: 100 (+10).
+Upgrade Cost: 1,300 Credits, 28 Nexium Crystals.
+Features: Wormhole stabilizers, enhanced cargo for finds.
+
+Tier 4 (Max) (Event Horizon)
+Stats: Health: 180 (+20), Speed: 75 (+5), Cargo: 70 (+10), Weapons: 3, Sensors: 110 (+10).
+Upgrade Cost: 2,800 Credits, 55 Nexium Crystals.
+Features: Elite exploration suite, maximum discovery potential.
+
+---
+
+Battlecruiser (Heavy combat ship)
+Role: Large-scale PvE raids, fleet command, defensive operations.
+Base Stats: Health: 300, Speed: 40, Cargo: 30, Weapons: 5, Sensors: 50.
+Tier 1 (Warden)
+Stats: Health: 300, Speed: 40, Cargo: 30, Weapons: 5, Sensors: 50.
+Upgrade Cost: N/A (starting tier).
+Features: Heavy armament, tanky build.
+
+Tier 2 (Juggernaut)
+Stats: Health: 360 (+60), Speed: 42 (+2), Cargo: 35 (+5), Weapons: 6 (+1), Sensors: 55 (+5).
+Upgrade Cost: 800 Credits, 18 Nexium Crystals.
+Features: Reinforced armor, additional turrets.
+
+Tier 3 (Dreadnought)
+Stats: Health: 420 (+60), Speed: 44 (+2), Cargo: 40 (+5), Weapons: 7 (+1), Sensors: 60 (+5).
+Upgrade Cost: 1,800 Credits, 40 Nexium Crystals.
+Features: Advanced targeting, fleet coordination.
+
+Tier 4 (Max) (Behemoth)
+Stats: Health: 480 (+60), Speed: 46 (+2), Cargo: 45 (+5), Weapons: 8 (+1), Sensors: 65 (+5).
+Upgrade Cost: 4,000 Credits, 80 Nexium Crystals.
+Features: Elite siege capabilities, maximum durability.
+
+---
+
+Flagship (Command and fleet leader ship)
+Role: Fleet leadership, diplomatic missions, high-value operations.
+Base Stats: Health: 250, Speed: 55, Cargo: 50, Weapons: 4, Sensors: 70.
+Tier 1 (Sovereign)
+Stats: Health: 250, Speed: 55, Cargo: 50, Weapons: 4, Sensors: 70.
+Upgrade Cost: N/A (starting tier).
+Features: Command bridge, balanced elite stats.
+
+Tier 2 (Paragon)
+Stats: Health: 300 (+50), Speed: 58 (+3), Cargo: 60 (+10), Weapons: 5 (+1), Sensors: 75 (+5).
+Upgrade Cost: 750 Credits, 16 Nexium Crystals.
+Features: Fleet communication upgrades, enhanced command.
+
+Tier 3 (Leviathan)
+Stats: Health: 350 (+50), Speed: 61 (+3), Cargo: 70 (+10), Weapons: 6 (+1), Sensors: 80 (+5).
+Upgrade Cost: 1,700 Credits, 38 Nexium Crystals.
+Features: Diplomatic modules, advanced fleet control.
+
+Tier 4 (Max) (Imperator)
+Stats: Health: 400 (+50), Speed: 64 (+3), Cargo: 80 (+10), Weapons: 7 (+1), Sensors: 85 (+5).
+Upgrade Cost: 3,800 Credits, 75 Nexium Crystals.
+Features: Supreme command suite, maximum leadership potential.

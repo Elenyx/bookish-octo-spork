@@ -101,13 +101,13 @@ class EconomySystem {
     }
 
     const totalCost = item.price * quantity;
-    if (user.credits < totalCost) {
+    if ((user.credits || 0) < totalCost) {
       throw new Error('Insufficient credits');
     }
 
     // Deduct credits
     await storage.updateUser(userId, {
-      credits: user.credits - totalCost
+      credits: (user.credits || 0) - totalCost
     });
 
     // Add item to user inventory
@@ -139,7 +139,7 @@ class EconomySystem {
       item: item.name,
       quantity,
       totalCost,
-      remainingCredits: user.credits - totalCost
+      remainingCredits: (user.credits || 0) - totalCost
     };
   }
 
@@ -151,7 +151,7 @@ class EconomySystem {
       throw new Error('Resource not found');
     }
 
-    if (targetResource.quantity < quantity) {
+    if ((targetResource.quantity || 0) < quantity) {
       throw new Error('Insufficient resource quantity');
     }
 
@@ -164,7 +164,7 @@ class EconomySystem {
     }
 
     await storage.updateUser(userId, {
-      credits: user.credits + totalIncome
+      credits: (user.credits || 0) + totalIncome
     });
 
     // Update or remove resource
@@ -172,7 +172,7 @@ class EconomySystem {
       await storage.removeResource(resourceId);
     } else {
       await storage.updateResource(resourceId, {
-        quantity: targetResource.quantity - quantity
+        quantity: (targetResource.quantity || 0) - quantity
       });
     }
 
@@ -190,8 +190,10 @@ class EconomySystem {
     // Update user stats
     await storage.updateUser(userId, {
       stats: {
-        ...user.stats,
-        trades: user.stats.trades + 1
+        exploration: (user.stats?.exploration || 0),
+        combat: (user.stats?.combat || 0),
+        artifacts: (user.stats?.artifacts || 0),
+        trades: (user.stats?.trades || 0) + 1
       }
     });
 
@@ -200,7 +202,7 @@ class EconomySystem {
       resourceSold: targetResource.name,
       quantitySold: quantity,
       income: totalIncome,
-      newCredits: user.credits + totalIncome
+      newCredits: (user.credits || 0) + totalIncome
     };
   }
 
@@ -221,7 +223,7 @@ class EconomySystem {
     // Check if user has all required materials
     const materialCheck = recipe.materials?.every(material => {
       const userMaterial = userResources.find(r => r.name === material.name);
-      return userMaterial && userMaterial.quantity >= material.quantity;
+      return userMaterial && (userMaterial.quantity || 0) >= material.quantity;
     });
 
     if (!materialCheck) {
@@ -233,11 +235,11 @@ class EconomySystem {
       for (const material of recipe.materials) {
         const userMaterial = userResources.find(r => r.name === material.name);
         if (userMaterial) {
-          if (userMaterial.quantity === material.quantity) {
+          if ((userMaterial.quantity || 0) === material.quantity) {
             await storage.removeResource(userMaterial.id);
           } else {
             await storage.updateResource(userMaterial.id, {
-              quantity: userMaterial.quantity - material.quantity
+              quantity: (userMaterial.quantity || 0) - material.quantity
             });
           }
         }

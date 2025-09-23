@@ -69,7 +69,7 @@ class GuildSystem {
       };
     }
 
-    if (guild.memberCount >= guild.maxMembers) {
+    if ((guild.memberCount || 0) >= (guild.maxMembers || 100)) {
       return {
         success: false,
         error: 'Guild is full'
@@ -81,7 +81,7 @@ class GuildSystem {
     
     // Update guild member count
     await storage.updateGuild(guildId, {
-      memberCount: guild.memberCount + 1
+      memberCount: (guild.memberCount || 0) + 1
     });
 
     return {
@@ -100,7 +100,7 @@ class GuildSystem {
     const guild = await storage.getGuild(user.guildId);
     if (guild) {
       await storage.updateGuild(guild.id, {
-        memberCount: Math.max(1, guild.memberCount - 1) // Keep at least NPC leader
+        memberCount: Math.max(1, (guild.memberCount || 0) - 1) // Keep at least NPC leader
       });
     }
 
@@ -126,29 +126,29 @@ class GuildSystem {
     let contributionValue = 0;
 
     if (resourceType === 'credits') {
-      if (user.credits < amount) {
+      if ((user.credits || 0) < amount) {
         throw new Error('Insufficient credits');
       }
       await storage.updateUser(userId, {
-        credits: user.credits - amount
+        credits: (user.credits || 0) - amount
       });
       contributionValue = amount;
     } else if (resourceType === 'nexium') {
-      if (user.nexium < amount) {
+      if ((user.nexium || 0) < amount) {
         throw new Error('Insufficient nexium');
       }
       await storage.updateUser(userId, {
-        nexium: user.nexium - amount
+        nexium: (user.nexium || 0) - amount
       });
       contributionValue = amount * 10; // Nexium is worth more
     }
 
     // Add experience to guild
     const expGained = Math.floor(contributionValue / 10);
-    const newGuildExp = guild.experience + expGained;
+    const newGuildExp = (guild.experience || 0) + expGained;
     const newGuildLevel = Math.floor(newGuildExp / 1000) + 1;
 
-    const leveledUp = newGuildLevel > guild.level;
+    const leveledUp = newGuildLevel > (guild.level || 1);
 
     await storage.updateGuild(guild.id, {
       experience: newGuildExp,
@@ -158,7 +158,7 @@ class GuildSystem {
     // Award personal experience to contributor
     if (user) {
       const personalExp = Math.floor(expGained * 0.5);
-      const currentUserExp = user.experience + personalExp;
+      const currentUserExp = (user.experience || 0) + personalExp;
       await storage.updateUser(userId, {
         experience: currentUserExp
       });
@@ -204,9 +204,9 @@ class GuildSystem {
       .sort((a, b) => {
         // Sort by level first, then by experience
         if (b.level !== a.level) {
-          return b.level - a.level;
+          return (b.level || 1) - (a.level || 1);
         }
-        return b.experience - a.experience;
+        return (b.experience || 0) - (a.experience || 0);
       })
       .map((guild, index) => ({
         ...guild,

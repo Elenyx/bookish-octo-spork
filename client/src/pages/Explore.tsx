@@ -41,7 +41,7 @@ export default function Explore() {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['/api/user'] });
       const rewards = data.result?.rewards || [];
-      const rewardText = rewards.map(r => `${r.name} x${r.quantity}`).join(', ');
+      const rewardText = rewards.map((r: any) => `${r.name} x${r.quantity}`).join(', ');
       
       toast({
         title: "Exploration Complete!",
@@ -57,7 +57,7 @@ export default function Explore() {
     }
   });
 
-  const activeShip = ships.find(ship => ship.isActive);
+  const activeShip = ships.find((ship: any) => ship.isActive);
 
   const explorationTypes = [
     {
@@ -264,7 +264,7 @@ export default function Explore() {
                 </div>
               ) : explorations.length > 0 ? (
                 <div className="space-y-4">
-                  {explorations.map((exploration, index) => (
+                  {explorations.map((exploration: any, index: number) => (
                     <div key={exploration.id} className="border rounded-lg p-4">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-2">
@@ -287,7 +287,7 @@ export default function Explore() {
                         <div className="space-y-1">
                           <h5 className="text-xs font-medium text-muted-foreground">Rewards:</h5>
                           <div className="flex flex-wrap gap-1">
-                            {exploration.result.rewards.map((reward, idx) => (
+                            {exploration.result.rewards.map((reward: any, idx: number) => (
                               <Badge key={idx} variant="outline" className="text-xs" data-testid={`badge-reward-${index}-${idx}`}>
                                 {reward.name} x{reward.quantity}
                               </Badge>

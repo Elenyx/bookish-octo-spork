@@ -176,7 +176,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async addExploration(exploration: InsertExploration): Promise<Exploration> {
-    const [newExploration] = await db.insert(explorations).values([exploration]).returning();
+    const [newExploration] = await db.insert(explorations).values([exploration as any]).returning();
     return newExploration;
   }
 
@@ -188,7 +188,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async addCombatLog(combat: InsertCombatLog): Promise<CombatLog> {
-    const [newCombat] = await db.insert(combatLogs).values([combat]).returning();
+    const [newCombat] = await db.insert(combatLogs).values([combat as any]).returning();
     return newCombat;
   }
 
@@ -219,7 +219,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createRecipe(recipe: InsertRecipe): Promise<Recipe> {
-    const [newRecipe] = await db.insert(recipes).values([recipe]).returning();
+    const [newRecipe] = await db.insert(recipes).values([recipe as any]).returning();
     return newRecipe;
   }
 }

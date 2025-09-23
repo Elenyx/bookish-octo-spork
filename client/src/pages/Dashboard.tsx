@@ -75,7 +75,7 @@ export default function Dashboard() {
     );
   }
 
-  const activeShip = ships.find(ship => ship.isActive);
+  const activeShip = ships.find((ship: any) => ship.isActive);
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -103,7 +103,7 @@ export default function Dashboard() {
               <p className="text-muted-foreground">Loading fleet...</p>
             </div>
           ) : (
-            ships.map(ship => (
+            ships.map((ship: any) => (
               <ShipCard key={ship.id} ship={ship} />
             ))
           )}
@@ -163,7 +163,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {explorations.slice(0, 3).map((exploration, index) => (
+                  {explorations.slice(0, 3).map((exploration: any, index: number) => (
                     <div key={exploration.id} className="flex items-center justify-between p-2 bg-muted rounded">
                       <div>
                         <div className="font-medium text-foreground">
@@ -266,7 +266,7 @@ export default function Dashboard() {
               <div className="bg-muted rounded-lg p-4">
                 <h4 className="font-bold mb-3">Trending Items</h4>
                 <div className="space-y-2">
-                  {marketItems.slice(0, 3).map((item, index) => (
+                  {marketItems.slice(0, 3).map((item: any, index: number) => (
                     <div key={index} className="flex items-center justify-between">
                       <div>
                         <div className="font-medium text-sm text-foreground">{item.name}</div>

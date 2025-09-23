@@ -31,25 +31,25 @@ export default function PlayerStatus({ user, activeShip }: PlayerStatusProps) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary" data-testid="text-exploration-stat">
-                  {user.stats.exploration}
+                  {user.stats?.exploration || 0}
                 </div>
                 <div className="text-sm text-muted-foreground">Sectors Explored</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-destructive" data-testid="text-combat-stat">
-                  {user.stats.combat}
+                  {user.stats?.combat || 0}
                 </div>
                 <div className="text-sm text-muted-foreground">Battles Won</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-accent" data-testid="text-artifacts-stat">
-                  {user.stats.artifacts}
+                  {user.stats?.artifacts || 0}
                 </div>
                 <div className="text-sm text-muted-foreground">Artifacts Found</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-secondary" data-testid="text-trades-stat">
-                  {user.stats.trades}
+                  {user.stats?.trades || 0}
                 </div>
                 <div className="text-sm text-muted-foreground">Trades Made</div>
               </div>
@@ -60,11 +60,11 @@ export default function PlayerStatus({ user, activeShip }: PlayerStatusProps) {
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-muted-foreground">Experience</span>
                 <span className="font-mono text-foreground" data-testid="text-user-experience">
-                  {user.experience}/{user.level * 1000}
+                  {user.experience || 0}/{(user.level || 1) * 1000}
                 </span>
               </div>
               <StatBar 
-                value={user.experience % 1000} 
+                value={(user.experience || 0) % 1000} 
                 max={1000} 
                 className="h-2"
               />
@@ -89,7 +89,7 @@ export default function PlayerStatus({ user, activeShip }: PlayerStatusProps) {
                   <span className="text-sm text-muted-foreground">Credits</span>
                 </div>
                 <span className="font-mono font-bold text-accent text-lg" data-testid="text-user-credits">
-                  {user.credits.toLocaleString()}
+                  {(user.credits || 0).toLocaleString()}
                 </span>
               </div>
               <div className="flex items-center justify-between">

@@ -61,7 +61,7 @@ export default function Guild() {
     }
   });
 
-  const userGuild = user?.guildId ? guilds.find(g => g.id === user.guildId) : null;
+  const userGuild = user?.guildId ? guilds.find((g: any) => g.id === user.guildId) : null;
 
   const guildTypeIcons = {
     military: Sword,
@@ -230,7 +230,7 @@ export default function Guild() {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                {guilds.sort((a, b) => (b.level * 1000 + b.experience) - (a.level * 1000 + a.experience)).slice(0, 10).map((guild, index) => {
+                {guilds.sort((a: any, b: any) => (b.level * 1000 + b.experience) - (a.level * 1000 + a.experience)).slice(0, 10).map((guild: any, index: number) => {
                   const Icon = guildTypeIcons[guild.type as keyof typeof guildTypeIcons] || Shield;
                   const color = guildTypeColors[guild.type as keyof typeof guildTypeColors] || 'text-primary';
                   const isCurrentGuild = guild.id === userGuild.id;
@@ -277,7 +277,7 @@ export default function Guild() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {guilds.map(guild => {
+                {guilds.map((guild: any) => {
                   const Icon = guildTypeIcons[guild.type as keyof typeof guildTypeIcons] || Shield;
                   const color = guildTypeColors[guild.type as keyof typeof guildTypeColors] || 'text-primary';
                   

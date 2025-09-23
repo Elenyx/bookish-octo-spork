@@ -54,7 +54,7 @@ export default function Fleet() {
     }
   });
 
-  const activeShip = ships.find(ship => ship.isActive);
+  const activeShip = ships.find((ship: any) => ship.isActive);
 
   if (isLoading) {
     return (
@@ -169,7 +169,7 @@ export default function Fleet() {
 
       {/* Fleet Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {ships.map(ship => (
+        {ships.map((ship: any) => (
           <div key={ship.id} className="relative">
             <ShipCard ship={ship} />
             <div className="mt-4 flex space-x-2">

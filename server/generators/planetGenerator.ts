@@ -161,7 +161,7 @@ class PlanetGenerator {
       'Orbital Debris', 'Strange Formation', 'Underground Lake', 'Crystal Caverns'
     ];
 
-    const interests = [];
+    const interests: string[] = [];
     const numPOI = Math.floor(Math.random() * 4);
     
     for (let i = 0; i < numPOI; i++) {

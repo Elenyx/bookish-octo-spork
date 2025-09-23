@@ -1,0 +1,11 @@
+{
+  "name": "nexrpg-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "tsx index.ts"
+  }
+}

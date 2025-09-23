@@ -1,0 +1,14 @@
+[project]
+name = "nexrpg"
+
+[[service]]
+name = "server"
+type = "docker"
+path = "server"
+port = 3000
+
+[[service]]
+name = "client"
+type = "docker"
+path = "client"
+port = 80

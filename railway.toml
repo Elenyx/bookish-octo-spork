@@ -14,3 +14,7 @@ path = "client"
 buildCommand = "npm run build"
 outputDir = "dist"
 port = 80
+
+[[service.packages]]
+name = "node"
+version = "20"

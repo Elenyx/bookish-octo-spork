@@ -11,6 +11,10 @@ export const EMOJIS: { [key: string]: string } = {
   battles: '<a:Battle:1420078887312036003>',
   fleet: '<a:Fleet:1420078944304103567>',
   resources: '<a:Resources:1420078993809473586>',
+  contribute: '<a:Contribute:1420433027221164042>',
+  type: `<a:Type:1420433014202044480>`,
+  members: `<a:Member:1420433001938026547>`,
+  leaveGuild:`<a:Leave:1420434200724639799>`,
   rewards: '<a:Rewards:1420094290134175764>'
 };
 

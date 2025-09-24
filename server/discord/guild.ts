@@ -23,9 +23,10 @@ const guild = {
           .setColor(0x8B5CF6)
           .setTitle(`${userGuildEmoji.display || EMOJIS.commander} ${userGuild?.name}`)
           .setDescription(`Guild Level: ${userGuild?.level}`)
+          // keep Members and Type as separate (non-inline) fields placed below the main description
           .addFields(
-            { name: '👥 Members', value: `${userGuild?.memberCount}/${userGuild?.maxMembers}`, inline: true },
-            { name: '📊 Type', value: userGuild?.type || 'Unknown', inline: true }
+            { name: `Members`, value: `${EMOJIS.members}  ${userGuild?.memberCount}/${userGuild?.maxMembers}`, inline: false },
+            { name: `Type`, value: `${EMOJIS.type}  ${userGuild?.type || 'Unknown'}`, inline: false }
           );
 
         const actionRow = new ActionRowBuilder<ButtonBuilder>()
@@ -33,18 +34,18 @@ const guild = {
             (() => {
               const b = new ButtonBuilder()
                 .setCustomId('guild_contribute')
-                .setLabel('Contribute')
+                .setLabel(' Contribute')
                 .setStyle(ButtonStyle.Primary);
-              const p = parseEmojiTag(EMOJIS.nexium);
+              const p = parseEmojiTag(EMOJIS.contribute);
               if (p) b.setEmoji({ id: p.id, name: p.name, animated: p.animated });
               return b;
             })(),
             (() => {
               const b = new ButtonBuilder()
                 .setCustomId('guild_leave')
-                .setLabel('Leave Guild')
+                .setLabel(' Leave Guild')
                 .setStyle(ButtonStyle.Danger);
-              const p = parseEmojiTag(EMOJIS.resources);
+              const p = parseEmojiTag(EMOJIS.leaveGuild);
               if (p) b.setEmoji({ id: p.id, name: p.name, animated: p.animated });
               return b;
             })()

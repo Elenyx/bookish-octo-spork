@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from 'discord.js';
 import { storage } from '../storage';
-import EMOJIS from './emojis';
+import EMOJIS, { SHIP_TIER_EMOJIS, parseEmojiTag } from './emojis';
 
 const fleet = {
   data: new SlashCommandBuilder()
@@ -22,9 +22,16 @@ const fleet = {
         .setDescription('Manage your ships and upgrades');
 
       ships.forEach(ship => {
-  const status = ship.isActive ? '🟢 ACTIVE' : '⚪ INACTIVE';
+        const status = ship.isActive ? '🟢 ACTIVE' : '⚪ INACTIVE';
+        // determine tier emoji key (e.g. 'ScoutT1', 'FighterT3')
+        const typeKey = String(ship.type || '').replace(/\s+/g, ''); // remove spaces
+        const tierKey = `${typeKey}T${ship.tier}`;
+        const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
+        const tierEmojiParsed = tierEmojiTag ? parseEmojiTag(tierEmojiTag) : null;
+        const title = tierEmojiParsed ? `${tierEmojiTag} ${ship.variant}` : `${ship.variant} (Tier ${ship.tier})`;
+
         embed.addFields({
-          name: `${ship.variant} (Tier ${ship.tier})`,
+          name: title,
           value: `${status}\n**Type**: ${ship.type}\n**Health**: ${ship.health}/${ship.maxHealth}\n**Speed**: ${ship.speed} | **Cargo**: ${ship.cargo} | **Weapons**: ${ship.weapons}`,
           inline: true
         });
@@ -35,11 +42,20 @@ const fleet = {
         .setPlaceholder('Select a ship to activate or upgrade');
 
       ships.forEach(ship => {
-        selectMenu.addOptions({
+        // add emoji to option if available
+        const typeKey = String(ship.type || '').replace(/\s+/g, '');
+        const tierKey = `${typeKey}T${ship.tier}`;
+        const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
+        const option: any = {
           label: `${ship.variant} (${ship.type})`,
           description: `Tier ${ship.tier} - Health: ${ship.health}/${ship.maxHealth}`,
           value: ship.id
-        });
+        };
+        if (tierEmojiTag) {
+          const parsed = parseEmojiTag(tierEmojiTag);
+          if (parsed) option.emoji = { id: parsed.id, name: parsed.name, animated: parsed.animated };
+        }
+        selectMenu.addOptions(option);
       });
 
       const actionRow = new ActionRowBuilder<StringSelectMenuBuilder>()

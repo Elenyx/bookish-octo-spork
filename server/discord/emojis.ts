@@ -21,6 +21,39 @@ export const EMOJIS: { [key: string]: string } = {
 
 export default EMOJIS;
 
+// Ship tier emojis (use ONLY for ship tier displays)
+export const SHIP_TIER_EMOJIS: { [key: string]: string } = {
+  'ScoutT1': '<a:ScoutT1:1420448091139473479>',
+  'ScoutT2': '<a:ScoutT2:1420448106079715348>',
+  'ScoutT3': '<a:ScoutT3:1420448118238875740>',
+  'ScoutT4': '<a:ScoutT4:1420448131035824280>',
+
+  'FighterT1': '<a:FighterT1:1420448182252343388>',
+  'FighterT2': '<a:FighterT2:1420448194206367894>',
+  'FighterT3': '<a:FighterT3:1420448205069357110>',
+  'FighterT4': '<a:FighterT4:1420448216557682758>',
+
+  'FreighterT1': '<a:FreighterT1:1420448246484172941>',
+  'FreighterT2': '<a:FreighterT2:1420448258806779944>',
+  'FreighterT3': '<a:FreighterT3:1420448273579114496>',
+  'FreighterT4': '<a:FreighterT4:1420448287206670491>',
+
+  'ExplorerT1': '<a:ExplorerT1:1420448317388881950>',
+  'ExplorerT2': '<a:ExplorerT2:1420448332190318622>',
+  'ExplorerT3': '<a:ExplorerT3:1420448345121362031>',
+  'ExplorerT4': '<a:ExplorerT4:1420448356626333696>',
+
+  'BattlecruiserT1': '<a:BattlecruiserT1:1420448387961979001>',
+  'BattlecruiserT2': '<a:BattlecruiserT2:1420448400930770964>',
+  'BattlecruiserT3': '<a:BattlecruiserT3:1420448413539110922>',
+  'BattlecruiserT4': '<a:BattlecruiserT4:1420448424729252030>',
+
+  'FlagshipT1': '<a:FlagshipT1:1420448447793987714>',
+  'FlagshipT2': '<a:FlagshipT2:1420448459403694265>',
+  'FlagshipT3': '<a:FlagshipT3:1420448471877419079>',
+  'FlagshipT4': '<a:FlagshipT4:1420448481935360020>'
+};
+
 /**
  * Parse an emoji tag like '<a:Name:123456789>' and return { id, name, animated }
  */

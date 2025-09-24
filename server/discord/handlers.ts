@@ -3,7 +3,7 @@ import { storage } from '../storage';
 import { gameEngine } from '../services/gameEngine';
 import { guildSystem } from '../services/guildSystem';
 import { economySystem } from '../services/economySystem';
-import EMOJIS from './emojis';
+import EMOJIS, { SHIP_TIER_EMOJIS, parseEmojiTag } from './emojis';
 
 export async function handleInteraction(interaction: any, commands: Collection<string, any>) {
   if (interaction.isChatInputCommand()) {
@@ -117,7 +117,12 @@ async function handleViewFleet(interaction: ButtonInteraction, userId: string) {
   let fleetText = `${EMOJIS.rocket} **Your Fleet:**\n\n`;
   ships.forEach(ship => {
     const status = ship.isActive ? '🟢' : '⚪';
-    fleetText += `${status} **${ship.variant}** (${ship.type} T${ship.tier})\n`;
+    const typeKey = String(ship.type || '').replace(/\s+/g, '');
+    const tierKey = `${typeKey}T${ship.tier}`;
+    const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
+    const tierDisplay = tierEmojiTag ? `${tierEmojiTag}` : `T${ship.tier}`;
+
+    fleetText += `${status} **${ship.variant}** (${ship.type} ${tierDisplay})\n`;
     fleetText += `   HP: ${ship.health}/${ship.maxHealth} | Speed: ${ship.speed} | Cargo: ${ship.cargo}\n\n`;
   });
 

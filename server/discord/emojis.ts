@@ -12,10 +12,11 @@ export const EMOJIS: { [key: string]: string } = {
   fleet: '<a:Fleet:1420078944304103567>',
   resources: '<a:Resources:1420078993809473586>',
   contribute: '<a:Contribute:1420433027221164042>',
-  type: `<a:Type:1420433014202044480>`,
+  type: `<a:Type:1420440048519614544>`,
   members: `<a:Member:1420433001938026547>`,
   leaveGuild:`<a:Leave:1420434200724639799>`,
-  rewards: '<a:Rewards:1420094290134175764>'
+  rewards: '<a:Rewards:1420094290134175764>',
+  availableGuilds: `<a:Guild:1420439907838722068>`,
 };
 
 export default EMOJIS;

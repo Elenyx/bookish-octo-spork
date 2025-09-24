@@ -55,7 +55,7 @@ const guild = {
       } else {
         const embed = new EmbedBuilder()
           .setColor(0x8B5CF6)
-          .setTitle(`${EMOJIS.commander} Available Guilds`)
+          .setTitle(`${EMOJIS.availableGuilds} Available Guilds`)
           .setDescription('Choose a guild to join:');
 
         guilds.forEach(g => {

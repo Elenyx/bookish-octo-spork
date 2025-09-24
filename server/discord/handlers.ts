@@ -1,9 +1,10 @@
-import { CommandInteraction, ButtonInteraction, StringSelectMenuInteraction, Collection } from 'discord.js';
+import { CommandInteraction, ButtonInteraction, StringSelectMenuInteraction, Collection, EmbedBuilder } from 'discord.js';
+import { ContainerBuilder, SectionBuilder, TextDisplayBuilder, MessageFlags, SeparatorBuilder } from 'discord.js';
 import { storage } from '../storage';
 import { gameEngine } from '../services/gameEngine';
 import { guildSystem } from '../services/guildSystem';
 import { economySystem } from '../services/economySystem';
-import EMOJIS, { SHIP_TIER_EMOJIS, parseEmojiTag } from './emojis';
+import EMOJIS, { SHIP_TIER_EMOJIS, parseEmojiTag, emojiTagToURL } from './emojis';
 
 export async function handleInteraction(interaction: any, commands: Collection<string, any>) {
   if (interaction.isChatInputCommand()) {
@@ -113,23 +114,88 @@ async function handleSelectMenuInteraction(interaction: StringSelectMenuInteract
 
 async function handleViewFleet(interaction: ButtonInteraction, userId: string) {
   const ships = await storage.getUserShips(userId);
-  
-  let fleetText = `${EMOJIS.rocket} **Your Fleet:**\n\n`;
-  ships.forEach(ship => {
-    const status = ship.isActive ? '🟢' : '⚪';
-    const typeKey = String(ship.type || '')
-      .split(/\s+/)
-      .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
-      .join('');
-    const tierKey = `${typeKey}T${ship.tier}`;
-    const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
-    const tierDisplay = tierEmojiTag ? `${tierEmojiTag}` : `T${ship.tier}`;
+  // If too many ships, fallback to plain embed/text to avoid hitting Components V2 limits
+  if (!ships || ships.length === 0) {
+    await interaction.reply({ content: 'You have no ships in your fleet.', ephemeral: true });
+    return;
+  }
 
-    fleetText += `${status} **${ship.variant}** (${ship.type} ${tierDisplay})\n`;
-    fleetText += `   HP: ${ship.health}/${ship.maxHealth} | Speed: ${ship.speed} | Cargo: ${ship.cargo}\n\n`;
-  });
+  const MAX_SECTIONS = 12; // conservative: each section counts towards component limit
+  if (ships.length > MAX_SECTIONS) {
+    // Fall back to text embed (existing behavior) for large fleets
+    let fleetText = `${EMOJIS.rocket} **Your Fleet:**\n\n`;
+    ships.forEach(ship => {
+      const status = ship.isActive ? '🟢' : '⚪';
+      const typeKey = String(ship.type || '')
+        .split(/\s+/)
+        .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
+        .join('');
+      const tierKey = `${typeKey}T${ship.tier}`;
+      const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
+      const tierDisplay = tierEmojiTag ? `${tierEmojiTag}` : `T${ship.tier}`;
 
-  await interaction.reply({ content: fleetText, ephemeral: true });
+      fleetText += `${status} **${ship.variant}** (${ship.type} ${tierDisplay})\n`;
+      fleetText += `   HP: ${ship.health}/${ship.maxHealth} | Speed: ${ship.speed} | Cargo: ${ship.cargo}\n\n`;
+    });
+
+    await interaction.reply({ content: fleetText, ephemeral: true });
+    return;
+  }
+
+  // Attempt Components V2 display using Container/Section/TextDisplay
+  try {
+    const container = new ContainerBuilder().setAccentColor(0x00D4FF)
+      .addTextDisplayComponents(td => td.setContent(`${EMOJIS.rocket} **Your Fleet:**`));
+
+    ships.forEach(ship => {
+      const status = ship.isActive ? '🟢' : '⚪';
+      const typeKey = String(ship.type || '')
+        .split(/\s+/)
+        .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
+        .join('');
+      const tierKey = `${typeKey}T${ship.tier}`;
+      const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
+      const tierDisplay = tierEmojiTag ? `${tierEmojiTag}` : `T${ship.tier}`;
+
+      container.addSectionComponents(section =>
+        section
+          .addTextDisplayComponents(
+            td => td.setContent(`${status} **${ship.variant}** (${ship.type} ${tierDisplay})`),
+            td => td.setContent(`HP: ${ship.health}/${ship.maxHealth} | Speed: ${ship.speed} | Cargo: ${ship.cargo}`)
+          )
+          .setThumbnailAccessory(th => {
+            const url = tierEmojiTag ? emojiTagToURL(tierEmojiTag) : undefined;
+            if (url) th.setURL(url).setDescription(`${ship.variant} icon`);
+            return th;
+          })
+      );
+  // add a small separator between ships
+  container.addSeparatorComponents(separator => separator.setDivider(false));
+    });
+
+    // Reply using Components V2 flag (replace content with components)
+    await interaction.reply({ components: [container], flags: MessageFlags.IsComponentsV2, ephemeral: true });
+    return;
+  } catch (err) {
+    console.warn('Components V2 render failed, falling back to embed text:', err);
+    let fleetText = `${EMOJIS.rocket} **Your Fleet:**\n\n`;
+    ships.forEach(ship => {
+      const status = ship.isActive ? '🟢' : '⚪';
+      const typeKey = String(ship.type || '')
+        .split(/\s+/)
+        .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
+        .join('');
+      const tierKey = `${typeKey}T${ship.tier}`;
+      const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
+      const tierDisplay = tierEmojiTag ? `${tierEmojiTag}` : `T${ship.tier}`;
+
+      fleetText += `${status} **${ship.variant}** (${ship.type} ${tierDisplay})\n`;
+      fleetText += `   HP: ${ship.health}/${ship.maxHealth} | Speed: ${ship.speed} | Cargo: ${ship.cargo}\n\n`;
+    });
+
+    await interaction.reply({ content: fleetText, ephemeral: true });
+    return;
+  }
 }
 
 async function handleViewResources(interaction: ButtonInteraction, userId: string) {

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { storage } from '../storage';
-import EMOJIS from './emojis';
+import EMOJIS, { parseEmojiTag } from './emojis';
 
 const profile = {
   data: new SlashCommandBuilder()
@@ -29,17 +29,21 @@ const profile = {
           { name: `${EMOJIS.battles} Battles Won`, value: (user.stats?.combat || 0).toString(), inline: true }
         );
 
-      const actionRow = new ActionRowBuilder<ButtonBuilder>()
-        .addComponents(
-          new ButtonBuilder()
-            .setCustomId('view_fleet')
-            .setLabel(`${EMOJIS.fleet} Fleet`)
-            .setStyle(ButtonStyle.Primary),
-          new ButtonBuilder()
-            .setCustomId('view_resources')
-            .setLabel(`${EMOJIS.resources} Resources`)
-            .setStyle(ButtonStyle.Secondary)
-        );
+      const fleetBtn = new ButtonBuilder()
+        .setCustomId('view_fleet')
+        .setLabel('Fleet')
+        .setStyle(ButtonStyle.Primary);
+      const fleetEmoji = parseEmojiTag(EMOJIS.fleet);
+      if (fleetEmoji) fleetBtn.setEmoji({ id: fleetEmoji.id, name: fleetEmoji.name, animated: fleetEmoji.animated });
+
+      const resourcesBtn = new ButtonBuilder()
+        .setCustomId('view_resources')
+        .setLabel('Resources')
+        .setStyle(ButtonStyle.Secondary);
+      const resEmoji = parseEmojiTag(EMOJIS.resources);
+      if (resEmoji) resourcesBtn.setEmoji({ id: resEmoji.id, name: resEmoji.name, animated: resEmoji.animated });
+
+      const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(fleetBtn, resourcesBtn);
 
       await interaction.reply({ embeds: [embed], components: [actionRow] });
     } catch (error) {

@@ -24,7 +24,10 @@ const fleet = {
       ships.forEach(ship => {
         const status = ship.isActive ? '🟢 ACTIVE' : '⚪ INACTIVE';
         // determine tier emoji key (e.g. 'ScoutT1', 'FighterT3')
-        const typeKey = String(ship.type || '').replace(/\s+/g, ''); // remove spaces
+        const typeKey = String(ship.type || '')
+          .split(/\s+/)
+          .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
+          .join('');
         const tierKey = `${typeKey}T${ship.tier}`;
         const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
         const tierEmojiParsed = tierEmojiTag ? parseEmojiTag(tierEmojiTag) : null;
@@ -43,7 +46,10 @@ const fleet = {
 
       ships.forEach(ship => {
         // add emoji to option if available
-        const typeKey = String(ship.type || '').replace(/\s+/g, '');
+        const typeKey = String(ship.type || '')
+          .split(/\s+/)
+          .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
+          .join('');
         const tierKey = `${typeKey}T${ship.tier}`;
         const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
         const option: any = {

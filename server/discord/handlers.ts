@@ -117,7 +117,10 @@ async function handleViewFleet(interaction: ButtonInteraction, userId: string) {
   let fleetText = `${EMOJIS.rocket} **Your Fleet:**\n\n`;
   ships.forEach(ship => {
     const status = ship.isActive ? '🟢' : '⚪';
-    const typeKey = String(ship.type || '').replace(/\s+/g, '');
+    const typeKey = String(ship.type || '')
+      .split(/\s+/)
+      .map(s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase())
+      .join('');
     const tierKey = `${typeKey}T${ship.tier}`;
     const tierEmojiTag = SHIP_TIER_EMOJIS[tierKey];
     const tierDisplay = tierEmojiTag ? `${tierEmojiTag}` : `T${ship.tier}`;

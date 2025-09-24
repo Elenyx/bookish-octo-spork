@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } from 'discord.js';
 import { storage } from '../storage';
-import EMOJIS, { getGuildEmoji, parseEmojiTag } from './emojis';
+import EMOJIS, { getGuildEmoji, parseEmojiTag, emojiTagToURL } from './emojis';
 
 const guild = {
   data: new SlashCommandBuilder()
@@ -21,7 +21,7 @@ const guild = {
         const userGuildEmoji = getGuildEmoji(userGuild, EMOJIS.commander);
         const embed = new EmbedBuilder()
           .setColor(0x8B5CF6)
-          .setTitle(`${userGuildEmoji.display || EMOJIS.commander} ${userGuild?.name}`)
+          .setAuthor({ name: `${userGuild?.name}`, iconURL: emojiTagToURL(userGuildEmoji.display || EMOJIS.commander) })
           .setDescription(`Guild Level: ${userGuild?.level}`)
           // keep Members and Type as separate (non-inline) fields placed below the main description
           .addFields(
@@ -55,7 +55,7 @@ const guild = {
       } else {
         const embed = new EmbedBuilder()
           .setColor(0x8B5CF6)
-          .setTitle(`${EMOJIS.availableGuilds} Available Guilds`)
+          .setAuthor({ name: 'Available Guilds', iconURL: emojiTagToURL(EMOJIS.availableGuilds) })
           .setDescription('Choose a guild to join:');
 
         guilds.forEach(g => {

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } from 'discord.js';
 import { storage } from '../storage';
-import EMOJIS, { SHIP_TIER_EMOJIS, parseEmojiTag } from './emojis';
+import EMOJIS, { SHIP_TIER_EMOJIS, parseEmojiTag, emojiTagToURL } from './emojis';
 
 const fleet = {
   data: new SlashCommandBuilder()
@@ -18,7 +18,7 @@ const fleet = {
       
       const embed = new EmbedBuilder()
         .setColor(0x8B5CF6)
-        .setTitle(`${EMOJIS.rocket} Your Fleet`)
+        .setAuthor({ name: 'Your Fleet', iconURL: emojiTagToURL(EMOJIS.rocket) })
         .setDescription('Manage your ships and upgrades');
 
       ships.forEach(ship => {

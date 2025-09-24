@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
 import { storage } from '../storage';
 import { combatSystem } from '../services/combatSystem';
-import EMOJIS from './emojis';
+import EMOJIS, { emojiTagToURL } from './emojis';
 
 const combat = {
   data: new SlashCommandBuilder()
@@ -48,7 +48,7 @@ const combat = {
 
       const embed = new EmbedBuilder()
         .setColor(result.result?.winner === user.id ? 0x00FF00 : 0xFF0000)
-  .setTitle(`${EMOJIS.battles} COMBAT ${result.result?.winner === user.id ? 'VICTORY' : 'DEFEAT'}`)
+        .setAuthor({ name: `COMBAT ${result.result?.winner === user.id ? 'VICTORY' : 'DEFEAT'}`, iconURL: emojiTagToURL(EMOJIS.battles) })
         .addFields(
           { name: '🔥 Damage Dealt', value: (result.result?.attackerDamage || 0).toString(), inline: true },
           { name: '💥 Damage Received', value: (result.result?.defenderDamage || 0).toString(), inline: true },

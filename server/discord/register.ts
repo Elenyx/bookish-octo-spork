@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
-import EMOJIS from './emojis';
+import EMOJIS, { emojiTagToURL } from './emojis';
 import { storage } from '../storage';
 import { gameEngine } from '../services/gameEngine';
 
@@ -30,7 +30,7 @@ const register = {
 
       const embed = new EmbedBuilder()
         .setColor(0x00D4FF)
-        .setTitle(`${EMOJIS.rocket} Welcome to Stellar Nexus!`)
+        .setAuthor({ name: 'Welcome to Stellar Nexus!', iconURL: emojiTagToURL(EMOJIS.rocket) })
         .setDescription(`Commander **${username}**, your journey begins now!`)
         .addFields(
           { name: `${EMOJIS.credits} Credits`, value: '1,000', inline: true },

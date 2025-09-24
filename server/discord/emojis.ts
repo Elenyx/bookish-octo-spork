@@ -67,6 +67,30 @@ export function parseEmojiTag(tag: string) {
 }
 
 /**
+ * Convert a parsed emoji (or raw tag) to a CDN URL for embed icons.
+ * Returns undefined if tag cannot be parsed.
+ */
+export function emojiTagToURL(tagOrParsed: string | { id: string; name?: string; animated?: boolean } | null | undefined) {
+  if (!tagOrParsed) return undefined;
+  let id: string | undefined;
+  let animated = false;
+
+  if (typeof tagOrParsed === 'string') {
+    const parsed = parseEmojiTag(tagOrParsed);
+    if (!parsed) return undefined;
+    id = parsed.id;
+    animated = parsed.animated;
+  } else if (typeof tagOrParsed === 'object' && tagOrParsed.id) {
+    id = tagOrParsed.id;
+    animated = !!tagOrParsed.animated;
+  }
+
+  if (!id) return undefined;
+  const ext = animated ? 'gif' : 'png';
+  return `https://cdn.discordapp.com/emojis/${id}.${ext}`;
+}
+
+/**
  * Central mapping for guild-specific emojis.
  * Key can be guild id or guild name. Fill these with the custom emoji tag or emoji id you want displayed for that guild.
  * Example:

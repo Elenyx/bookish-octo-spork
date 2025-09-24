@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { economySystem } from '../services/economySystem';
-import EMOJIS, { parseEmojiTag } from './emojis';
+import EMOJIS, { parseEmojiTag, emojiTagToURL } from './emojis';
 
 const market = {
   data: new SlashCommandBuilder()
@@ -13,7 +13,7 @@ const market = {
       
       const embed = new EmbedBuilder()
         .setColor(0xFFD700)
-        .setTitle(`${EMOJIS.rocket} Galactic Market`)
+        .setAuthor({ name: 'Galactic Market', iconURL: emojiTagToURL(EMOJIS.rocket) })
         .setDescription('Buy and sell resources across the galaxy');
 
       marketItems.slice(0, 10).forEach(item => {

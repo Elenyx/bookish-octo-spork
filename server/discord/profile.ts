@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { storage } from '../storage';
-import EMOJIS, { parseEmojiTag } from './emojis';
+import EMOJIS, { parseEmojiTag, emojiTagToURL } from './emojis';
 
 const profile = {
   data: new SlashCommandBuilder()
@@ -19,7 +19,7 @@ const profile = {
 
       const embed = new EmbedBuilder()
         .setColor(0x00D4FF)
-        .setTitle(`${EMOJIS.commander} Commander ${user.username}`)
+        .setAuthor({ name: `Commander ${user.username}`, iconURL: emojiTagToURL(EMOJIS.commander) })
         .addFields(
           { name: `${EMOJIS.level} Level`, value: (user.level || 1).toString(), inline: true },
           { name: `${EMOJIS.credits} Credits`, value: (user.credits || 0).toLocaleString(), inline: true },

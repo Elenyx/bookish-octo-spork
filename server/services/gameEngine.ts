@@ -4,7 +4,18 @@ import { contentGenerator } from '../generators/contentGenerator';
 import { rewardCalculator } from '../utils/rewardCalculator';
 
 // Ship tier configurations from the attached file
-const SHIP_CONFIGS = {
+type ShipTierConfig = {
+  variant: string;
+  health: number;
+  speed: number;
+  cargo: number;
+  weapons: number;
+  sensors: number;
+  cost: number;
+  nexium?: number;
+};
+
+const SHIP_CONFIGS: Record<string, Record<number, ShipTierConfig>> = {
   scout: {
     1: { variant: 'Swiftwing', health: 100, speed: 80, cargo: 20, weapons: 1, sensors: 60, cost: 0 },
     2: { variant: 'Spectre', health: 120, speed: 90, cargo: 25, weapons: 1, sensors: 70, cost: 500, nexium: 10 },
@@ -118,16 +129,16 @@ class GameEngine {
     if ((user.credits || 0) < upgradeConfig.cost) {
       throw new Error('Insufficient credits');
     }
-    if ((upgradeConfig as any).nexium && (user.nexium || 0) < (upgradeConfig as any).nexium) {
+    if (typeof upgradeConfig.nexium === 'number' && (user.nexium || 0) < upgradeConfig.nexium) {
       throw new Error('Insufficient nexium crystals');
     }
 
     // Deduct resources
-    const updateData: any = {
+    const updateData: Partial<typeof user> = {
       credits: (user.credits || 0) - upgradeConfig.cost
     };
-    if ((upgradeConfig as any).nexium) {
-      updateData.nexium = (user.nexium || 0) - (upgradeConfig as any).nexium;
+    if (typeof upgradeConfig.nexium === 'number') {
+      (updateData as any).nexium = (user.nexium || 0) - upgradeConfig.nexium;
     }
     await storage.updateUser(userId, updateData);
 
@@ -148,7 +159,7 @@ class GameEngine {
       ship: upgradedShip,
       costPaid: { 
         credits: upgradeConfig.cost, 
-        nexium: (upgradeConfig as any).nexium || 0 
+  nexium: upgradeConfig.nexium || 0 
       }
     };
   }

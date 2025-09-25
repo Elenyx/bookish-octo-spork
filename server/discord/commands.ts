@@ -1,10 +1,10 @@
-import register from './register';
-import profile from './profile';
-import fleet from './fleet';
-import explore from './explore';
-import combat from './combat';
-import market from './market';
-import guild from './guild';
+import register from './commands/register';
+import profile from './commands/profile';
+import fleet from './commands/fleet';
+import explore from './commands/explore';
+import combat from './commands/combat';
+import market from './commands/market';
+import guild from './commands/guild';
 
 export const commands = [
   register,

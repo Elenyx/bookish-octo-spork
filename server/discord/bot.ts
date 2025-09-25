@@ -32,7 +32,7 @@ class DiscordBot {
         try {
           const ext = animated ? 'gif' : 'png';
           const url = `https://cdn.discordapp.com/emojis/${id}.${ext}`;
-          const res = await fetch(url, { method: 'GET' as any });
+          const res = await fetch(url, { method: 'GET' });
           return res.ok;
         } catch (e) {
           return false;

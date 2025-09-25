@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
-import { storage } from '../storage';
-import { combatSystem } from '../services/combatSystem';
-import EMOJIS, { emojiTagToURL } from './emojis';
+import { storage } from '../../storage';
+import { combatSystem } from '../../services/combatSystem';
+import EMOJIS, { emojiTagToURL } from '../emojis';
 
 const combat = {
   data: new SlashCommandBuilder()

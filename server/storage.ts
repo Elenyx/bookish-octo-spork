@@ -74,7 +74,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db.insert(users).values(insertUser).returning();
+  const [user] = (await db.insert(users).values(insertUser).returning()) as unknown as User[];
     return user;
   }
 
@@ -93,7 +93,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createShip(ship: InsertShip): Promise<Ship> {
-    const [newShip] = await db.insert(ships).values(ship).returning();
+    const [newShip] = (await db.insert(ships).values(ship).returning()) as unknown as Ship[];
     return newShip;
   }
 
@@ -116,7 +116,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async addResource(resource: InsertResource): Promise<Resource> {
-    const [newResource] = await db.insert(resources).values(resource).returning();
+    const [newResource] = (await db.insert(resources).values(resource).returning()) as unknown as Resource[];
     return newResource;
   }
 
@@ -139,7 +139,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createGuild(guild: InsertGuild): Promise<Guild> {
-    const [newGuild] = await db.insert(guilds).values(guild).returning();
+    const [newGuild] = (await db.insert(guilds).values(guild).returning()) as unknown as Guild[];
     return newGuild;
   }
 
@@ -162,7 +162,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAlliance(alliance: InsertAlliance): Promise<Alliance> {
-    const [newAlliance] = await db.insert(alliances).values(alliance).returning();
+    const [newAlliance] = (await db.insert(alliances).values(alliance).returning()) as unknown as Alliance[];
     return newAlliance;
   }
 
@@ -176,7 +176,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async addExploration(exploration: InsertExploration): Promise<Exploration> {
-    const [newExploration] = await db.insert(explorations).values([exploration as any]).returning();
+    const [newExploration] = (await db.insert(explorations).values([exploration]).returning()) as unknown as Exploration[];
     return newExploration;
   }
 
@@ -188,7 +188,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async addCombatLog(combat: InsertCombatLog): Promise<CombatLog> {
-    const [newCombat] = await db.insert(combatLogs).values([combat as any]).returning();
+    const [newCombat] = (await db.insert(combatLogs).values([combat]).returning()) as unknown as CombatLog[];
     return newCombat;
   }
 
@@ -200,7 +200,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async addMarketTransaction(transaction: InsertMarketTransaction): Promise<MarketTransaction> {
-    const [newTransaction] = await db.insert(marketTransactions).values(transaction).returning();
+    const [newTransaction] = (await db.insert(marketTransactions).values(transaction).returning()) as unknown as MarketTransaction[];
     return newTransaction;
   }
 
@@ -219,7 +219,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createRecipe(recipe: InsertRecipe): Promise<Recipe> {
-    const [newRecipe] = await db.insert(recipes).values([recipe as any]).returning();
+    const [newRecipe] = (await db.insert(recipes).values([recipe]).returning()) as unknown as Recipe[];
     return newRecipe;
   }
 }

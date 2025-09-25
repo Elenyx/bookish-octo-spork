@@ -221,8 +221,8 @@ class EconomySystem {
     const userResources = await storage.getUserResources(userId);
 
     // Check if user has all required materials
-    const materialCheck = recipe.materials?.every(material => {
-      const userMaterial = userResources.find(r => r.name === material.name);
+    const materialCheck = recipe.materials?.every((material: any) => {
+      const userMaterial = userResources.find((r: any) => r.name === material.name);
       return userMaterial && (userMaterial.quantity || 0) >= material.quantity;
     });
 

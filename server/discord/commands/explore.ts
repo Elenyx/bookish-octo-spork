@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
-import { storage } from '../storage';
-import { explorationSystem } from '../services/explorationSystem';
-import EMOJIS from './emojis';
+import { storage } from '../../storage';
+import { explorationSystem } from '../../services/explorationSystem';
+import EMOJIS from '../emojis';
 
 const explore = {
   data: new SlashCommandBuilder()

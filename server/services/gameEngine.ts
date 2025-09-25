@@ -1,5 +1,5 @@
 import { storage } from '../storage';
-import { InsertUser, InsertShip } from '@shared/schema';
+import { InsertUser, InsertShip } from '../shared/schema';
 import { contentGenerator } from '../generators/contentGenerator';
 import { rewardCalculator } from '../utils/rewardCalculator';
 

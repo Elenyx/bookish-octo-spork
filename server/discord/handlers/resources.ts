@@ -1,7 +1,7 @@
 import { ButtonInteraction } from 'discord.js';
 import { storage } from '../../storage';
 import EMOJIS from '../emojis';
-import type { Resource } from '../../../shared/schema';
+import type { Resource } from '../../shared/schema';
 
 export async function handleViewResources(interaction: ButtonInteraction, userId: string) {
   const resources = await storage.getUserResources(userId);

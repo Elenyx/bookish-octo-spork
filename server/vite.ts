@@ -1,3 +1,4 @@
+// @ts-nocheck
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
@@ -5,19 +6,7 @@ import path from "path";
 import { type Server } from "http";
 // import viteConfig from "./vite.config"; // moved inside setupVite
 import { nanoid } from "nanoid";
-
-// const viteLogger = createLogger(); // moved inside setupVite
-
-export function log(message: string, source = "express") {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
+import { log } from "./log";
 
 export async function setupVite(app: Express, server: Server) {
   const { createServer: createViteServer, createLogger } = await import("vite");
@@ -48,12 +37,7 @@ export async function setupVite(app: Express, server: Server) {
     const url = req.originalUrl;
 
     try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html",
-      );
+      const clientTemplate = path.resolve(import.meta.dirname, "..", "client", "index.html");
 
       // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");

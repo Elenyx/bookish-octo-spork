@@ -6,7 +6,7 @@ import {
   type Alliance, type InsertAlliance, type Exploration, type InsertExploration,
   type CombatLog, type InsertCombatLog, type MarketTransaction, 
   type InsertMarketTransaction, type Recipe, type InsertRecipe
-} from "@shared/schema";
+} from "./shared/schema";
 import { db } from "./db";
 import { eq, desc, and } from "drizzle-orm";
 

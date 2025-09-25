@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, log } from "./vite";
+import { log } from "./log";
 import { discordBot } from "./discord/bot";
 
 const app = express();
@@ -57,6 +57,8 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
+    // dynamic import so tsc doesn't load Vite types during server-only builds
+    const { setupVite } = await import("./vite");
     await setupVite(app, server);
   }
   // In production, client is served separately as static site

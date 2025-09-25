@@ -1,7 +1,7 @@
 import { ButtonInteraction, ContainerBuilder, MessageFlags, SectionBuilder, TextDisplayBuilder, SeparatorBuilder } from 'discord.js';
 import { storage } from '../../storage';
 import EMOJIS, { SHIP_TIER_EMOJIS, emojiTagToURL } from '../emojis';
-import type { Ship } from '../../../shared/schema';
+import type { Ship } from '../../shared/schema';
 
 export async function handleViewFleet(interaction: ButtonInteraction, userId: string) {
   const ships = await storage.getUserShips(userId);

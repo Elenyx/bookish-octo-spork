@@ -1,7 +1,7 @@
 import { StringSelectMenuInteraction } from 'discord.js';
 import { storage } from '../../storage';
 import EMOJIS from '../emojis';
-import type { Ship } from '../../../shared/schema';
+import type { Ship } from '../../shared/schema';
 
 export async function handleShipSelection(interaction: StringSelectMenuInteraction, userId: string, shipId: string) {
   await storage.setActiveShip(userId, shipId);
